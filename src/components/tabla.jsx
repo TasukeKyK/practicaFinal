@@ -1,8 +1,8 @@
 import React from "react";
 import "./tabla.css";
-const Tabla = ({ users }) => {
-  const renderList = () => {
-    return users.map((user) => {
+const Tabla = ({ users }) => {  // recibe los usuarios que va a mostrar
+  const renderList = () => {  // renderiza los usuarios 
+    return users.map((user) => {  // accede a cada uno de ellos y a sus propiedades
       return (
         <tr>
           <th>{user.name.first}</th>

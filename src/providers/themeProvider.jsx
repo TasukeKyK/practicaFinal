@@ -1,6 +1,7 @@
 
 import React from 'react'
-export const themes = {
+
+export const themes = {   //exporta los dos temas que hay
     light: {
       color: "#555555",
       background: "#eeeeee"
