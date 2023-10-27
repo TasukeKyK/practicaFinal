@@ -3,7 +3,7 @@ import React from "react";
 export const themes = {
   //exporta los dos temas que hay
   light: {
-    color: "#555555",
+    color: "black",
     background: "#eeeeee",
   },
   dark: {
