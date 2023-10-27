@@ -1,13 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import "./App.css";
 import Tabla from "./components/tabla";
 import ThemeContext, { themes } from "./providers/themeProvider";
-import { getListService } from "./services/getlist.service";
 import Buscador from "./components/buscador";
-
+import { usePracticaFList } from "./hooks/usePracticaFList";
 function App() {
-  const [users, setUsers] = useState(null); // Estado para almacenar los datos
-  const [isLoading, setIsLoading] = useState(true); // Estado para manejar la carga
+  const [users, isLoading] = usePracticaFList();
+
   const [inputValue, setInputValue] = useState(""); // Estado para manejar el input
   const [currentTheme, setCurrentTheme] = useState(themes.light); // Estado del theme actual
   const [appStyle, setAppStyle] = useState({
@@ -16,26 +15,7 @@ function App() {
     color: currentTheme.color,
   });
 
-  // hook que se utiliza cada vez que se refresca
-  useEffect(() => {
-    setTimeout(() => {
-      // Verifica si la solicitud ya se ha realizado
-      if (!users) {
-        getListService()
-          .then((data) => {
-            setUsers(data);
-            setUsersTemplate(data);
-            console.log(data);
-          })
-          .catch(() => console.error("Ha ocurrido un error"))
-          .finally(() => {
-            setIsLoading(false); // Marca la solicitud como completa
-          });
-      }
-    }, 2000);
-  }, []); // La dependencia data asegura que esta solicitud se realice solo una vez
-
-  const [usersTemplate, setUsersTemplate] = useState(""); // variable que almacena los usuarios que se van a mostrar en la lista
+  const [usersTemplate, setUsersTemplate] = useState(users); // variable que almacena los usuarios que se van a mostrar en la lista
 
   const handleChange = (event) => {
     // cada vez que se escriba en el input va a guardarse el valor
@@ -71,6 +51,8 @@ function App() {
   if (isLoading) {
     // mientras devuelven los datos de la api se muestra esto
     return <p>Cargando...</p>;
+  } else if (!usersTemplate) {
+    setUsersTemplate(users);
   } else {
     return (
       // cuando ya han sido devueltos se renderizan los componentes
