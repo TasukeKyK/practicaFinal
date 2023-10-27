@@ -11,7 +11,7 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState(themes.light); // Estado del theme actual
   const [appStyle, setAppStyle] = useState({
     // estilo del div superior
-    backgoundColor: currentTheme.background,
+    backgroundColor: currentTheme.background,
     color: currentTheme.color,
   });
 
@@ -43,7 +43,7 @@ function App() {
     }
 
     setAppStyle({
-      backgoundColor: currentTheme.background,
+      backgroundColor: currentTheme.background,
       color: currentTheme.color,
     });
   };
