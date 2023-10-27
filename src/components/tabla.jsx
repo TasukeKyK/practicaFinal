@@ -1,7 +1,6 @@
 import React from "react";
 import "./tabla.css";
 const Tabla = ({ users }) => {  // recibe los usuarios que va a mostrar
-  console.log(use)
   const renderList = () => {  // renderiza los usuarios 
     return users.map((user) => {  // accede a cada uno de ellos y a sus propiedades
       return (

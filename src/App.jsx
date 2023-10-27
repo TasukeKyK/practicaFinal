@@ -47,6 +47,18 @@ function App() {
       color: currentTheme.color,
     });
   };
+  const justOlders50 = (e) => {
+    if (e.target.checked) {
+      const filter = 50;
+      const newUsers = users.filter((user) => {
+        const fullName = `${user.name.first} ${user.name.last}`.toLowerCase(); // se hace el nombre completo para no tener que utilizar 3 variables
+        return user.dob.age >= 50;
+      });
+      setUsersTemplate(newUsers);
+    } else {
+      setUsersTemplate(users)
+    }
+  };
 
   if (isLoading) {
     // mientras devuelven los datos de la api se muestra esto
@@ -64,6 +76,9 @@ function App() {
             <h1>App bootcamp</h1>
             <input type="checkbox" onChange={switchThemes} />
             <label>Cambiar a modo oscuro</label>
+            <br/>
+            <input type="checkbox" onChange={justOlders50} />
+            <label>Mostrar usuarios mayores de 50</label>
             <Buscador onClick={onClick} onChange={handleChange} />
             <Tabla users={usersTemplate} />
           </ThemeContext.Provider>
